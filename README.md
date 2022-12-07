@@ -16,3 +16,11 @@
 - [Web (react)](./web-react/README.md)
 - Web (vue) - **coming soon??**
 - API (fast-api) - **coming soon??**
+
+## Development
+
+### VS Code
+
+VS Code has been configured to automatically open a set of terminals with the command `Terminals: Run`. This will open a root directory, as well as server and web subfolders and processes (5 in total).
+
+> **NOTE:** Could investigate opening specific server/web directories based on env variables (will require standard commands)...

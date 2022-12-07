@@ -1,0 +1,38 @@
+{
+  "autorun": false,
+  "autokill": true,
+  "terminals": [
+    {
+      "name": "root",
+      "description": "Root directory",
+      "focus": true,
+      "icon": "repo"
+    },
+    {
+      "name": "server-json",
+      "cwd": "./server-json",
+      "description": "Server (JSON) directory",
+      "icon": "folder"
+    },
+    {
+      "name": "server-json (⚡)",
+      "command": "npm run start",
+      "cwd": "./server-json",
+      "description": "Server (JSON) process",
+      "icon": "run"
+    },
+    {
+      "name": "web-react",
+      "cwd": "./web-react",
+      "description": "Web (React) directory",
+      "icon": "folder"
+    },
+    {
+      "name": "web-react (⚡)",
+      "command": "npm run dev",
+      "cwd": "./web-react",
+      "description": "Web (React) process",
+      "icon": "run"
+    }
+  ]
+}
