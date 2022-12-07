@@ -1,0 +1,11 @@
+# Configuration
+.env
+.env.*
+!.env.example
+
+# NodeJS / TS
+dist
+node_modules
+
+# Miscellaneous
+npm-debug.log*
