@@ -1,0 +1,65 @@
+diff --git a/node_modules/@nestjs/core/exceptions/base-exception-filter.d.ts b/node_modules/@nestjs/core/exceptions/base-exception-filter.d.ts
+index 4b5fb35..e569b30 100644
+--- a/node_modules/@nestjs/core/exceptions/base-exception-filter.d.ts
++++ b/node_modules/@nestjs/core/exceptions/base-exception-filter.d.ts
+@@ -6,8 +6,15 @@ export declare class BaseExceptionFilter<T = any> implements ExceptionFilter<T>
+     private static readonly logger;
+     protected readonly httpAdapterHost?: HttpAdapterHost;
+     constructor(applicationRef?: HttpServer);
+-    catch(exception: T, host: ArgumentsHost): void;
+-    handleUnknownError(exception: T, host: ArgumentsHost, applicationRef: AbstractHttpAdapter | HttpServer): void;
++    /**
++     * Method to implement a custom exception filter.
++     *
++     * @param exception - Class of the exception being handled
++     * @param host      - Used to access an array of arguments for the in-flight request
++     * @param logged    - Whether exception has already been logged
++     */
++    catch(exception: T, host: ArgumentsHost, logged?: boolean): void;
++    handleUnknownError(exception: T, host: ArgumentsHost, applicationRef: AbstractHttpAdapter | HttpServer, logged?: boolean): void;
+     isExceptionObject(err: any): err is Error;
+     /**
+      * Checks if the thrown error comes from the "http-errors" library.
+diff --git a/node_modules/@nestjs/core/exceptions/base-exception-filter.js b/node_modules/@nestjs/core/exceptions/base-exception-filter.js
+index 386406a..2c382fd 100644
+--- a/node_modules/@nestjs/core/exceptions/base-exception-filter.js
++++ b/node_modules/@nestjs/core/exceptions/base-exception-filter.js
+@@ -10,11 +10,11 @@ class BaseExceptionFilter {
+     constructor(applicationRef) {
+         this.applicationRef = applicationRef;
+     }
+-    catch(exception, host) {
++    catch(exception, host, logged = false) {
+         const applicationRef = this.applicationRef ||
+             (this.httpAdapterHost && this.httpAdapterHost.httpAdapter);
+         if (!(exception instanceof common_1.HttpException)) {
+-            return this.handleUnknownError(exception, host, applicationRef);
++            return this.handleUnknownError(exception, host, applicationRef, logged);
+         }
+         const res = exception.getResponse();
+         const message = (0, shared_utils_1.isObject)(res)
+@@ -31,7 +31,7 @@ class BaseExceptionFilter {
+             applicationRef.end(response);
+         }
+     }
+-    handleUnknownError(exception, host, applicationRef) {
++    handleUnknownError(exception, host, applicationRef, logged = false) {
+         const body = this.isHttpError(exception)
+             ? {
+                 statusCode: exception.statusCode,
+@@ -48,10 +48,12 @@ class BaseExceptionFilter {
+         else {
+             applicationRef.end(response);
+         }
+-        if (this.isExceptionObject(exception)) {
+-            return BaseExceptionFilter.logger.error(exception.message, exception.stack);
++        if (!logged) {
++            if (this.isExceptionObject(exception)) {
++                return BaseExceptionFilter.logger.error(exception.message, exception.stack);
++            }
++            return BaseExceptionFilter.logger.error(exception);
+         }
+-        return BaseExceptionFilter.logger.error(exception);
+     }
+     isExceptionObject(err) {
+         return (0, shared_utils_1.isObject)(err) && !!err.message;

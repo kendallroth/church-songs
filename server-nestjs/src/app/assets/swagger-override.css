@@ -1,0 +1,12 @@
+/* Shrink endpoint response schema descriptions */
+.swagger-ui .response-col_description p {
+  margin: 0.25rem 0;
+  font-size: 14px;
+}
+
+/* Shrink schema definition attribute descriptions */
+.swagger-ui .prop .renderedMarkdown p {
+  margin-top: 0.25rem;
+  font-size: 12px;
+  font-weight: 500;
+}

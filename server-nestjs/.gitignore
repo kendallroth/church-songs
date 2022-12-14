@@ -1,0 +1,3 @@
+# NOTE: Some items are duplicated from top-level to allow using .gitignore in place of other ignore files
+dist
+node_modules

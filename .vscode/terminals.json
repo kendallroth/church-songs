@@ -9,16 +9,16 @@
       "icon": "repo"
     },
     {
-      "name": "server-json",
-      "cwd": "./server-json",
-      "description": "Server (JSON) directory",
+      "name": "server-nestjs",
+      "cwd": "./server-nestjs",
+      "description": "Server (NestJS) directory",
       "icon": "folder"
     },
     {
-      "name": "server-json (⚡)",
-      "command": "npm run start",
-      "cwd": "./server-json",
-      "description": "Server (JSON) process",
+      "name": "server-nestjs (⚡)",
+      "command": "npm run start:dev",
+      "cwd": "./server-nestjs",
+      "description": "Server (NestJS) process",
       "icon": "run"
     },
     {

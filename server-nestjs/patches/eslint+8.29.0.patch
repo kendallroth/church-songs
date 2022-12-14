@@ -1,0 +1,13 @@
+diff --git a/node_modules/eslint/lib/cli.js b/node_modules/eslint/lib/cli.js
+index afd1e65..c8c1dd0 100644
+--- a/node_modules/eslint/lib/cli.js
++++ b/node_modules/eslint/lib/cli.js
+@@ -173,7 +173,7 @@ async function translateOptions({
+         cacheLocation: cacheLocation || cacheFile,
+         cacheStrategy,
+         errorOnUnmatchedPattern,
+-        fix: (fix || fixDryRun) && (quiet ? quietFixPredicate : true),
++        fix: (fix || fixDryRun),
+         fixTypes: fixType,
+         ignore,
+         overrideConfig,
